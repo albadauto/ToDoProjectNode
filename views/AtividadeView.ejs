@@ -1,0 +1,137 @@
+<%- include('./templates/header')%>
+<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+    Nova Atividade
+  </button>
+  <br>
+  <% if (success.length > 0){ %>
+    <div class="alert alert-success" role="alert">
+      <%= success %>
+    </div>
+  <% } %>
+
+
+  
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           
+          <form action="/atividades/cadastraAtividade" method="post">
+            <div class="row">
+              <div class="col">
+                <input type="text" name="nome" class="form-control" placeholder="Nome da Atividade" required>
+              </div>
+            </div><br>
+
+            <div class="row">
+              <div class="col-9">
+                <input type="text" name="instituicao" id="" class="form-control" placeholder="Nome da instituição (Opcional)">
+              </div>
+              <div class="col-3">
+                Feito?
+                <input type="checkbox" name="situacao" id="situacao" value="false" style="margin-bottom: 10px;" onchange="checkBoxTF()">
+              </div>
+            </div><br>
+
+            <div class="row">
+              <div class="col">
+                <textarea name="descricao" id="" cols="30" rows="10" class="form-control" placeholder="Descricao (opcional)"></textarea>
+              </div>
+            </div>
+          
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped table-dark" style="margin-top: 30px;">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Instituição</th>
+        <th scope="col">Descrição</th>
+        <th>Criado em</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% result.forEach((resultado) => {%>
+         <% if (resultado.situacao === false){ %>
+        <tr>
+          <th scope="row"><%= resultado.nome %></th>
+          <td><%= resultado.nomeInstituicao %></td>
+          <td><%= resultado.descricao %></td>
+          <td><%= resultado.dataCreated %></td>
+          <td>
+            <div class="pretty p-switch p-fill">
+              <input type="checkbox" id="feito<%= resultado.nome %>" onchange="feito('<%= resultado.nome %>')"/>
+              <div class="state">
+                  <label>Feito</label>
+              </div>
+           </div>
+          </td>
+          <td>
+         <form action="/atividades/updateAtividades" method="post">
+
+            <input type="submit" value="Marcar como feito" class="btn btn-warning" disabled id="marcar<%= resultado.nome %>">
+            <input type="hidden" name="situacaoHD" id="sit<%= resultado.nome %>" value="<%= resultado.situacao %>">
+            <input type="hidden" name="idativHD" value="<%= resultado._id %>">
+
+        </form>
+
+      </td>
+
+
+        </tr>
+        <% } %>
+
+      <%})%>
+     
+      
+    </tbody>
+  </table>
+
+ 
+  
+  <script>
+    function checkBoxTF(){
+      if (document.getElementById('situacao').checked){
+        document.getElementById('situacao').value = true
+      }else{
+        document.getElementById('situacao').value = false
+      }
+    }
+
+    function feito(nome){
+      
+        if (document.getElementById('feito' + nome).checked){
+          document.getElementById('sit' + nome).value = true
+          document.getElementById('marcar' + nome).disabled = false
+
+        }else{
+          document.getElementById('sit' + nome).value = false
+          document.getElementById('marcar' + nome).disabled = true
+
+        }
+      
+    }
+  </script>
+
+
+<%- include('./templates/footer')%>
