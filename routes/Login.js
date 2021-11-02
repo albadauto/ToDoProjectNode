@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { restart } = require('nodemon');
 require('../models/LoginModel')
 const LoginModel = mongoose.model('LoginModel');
-f
+
 router.get('/', (req,res) => {
     res.render('LoginView', {error: req.flash('error')})
 })
