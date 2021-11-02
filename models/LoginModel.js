@@ -11,6 +11,9 @@ const LoginModel = new Schema({
     registerDate:{
         type: Date,
         default: Date.now()
+    },
+    instituicao:{
+        type:String,
     }
 })
 

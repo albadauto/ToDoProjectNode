@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const LoginRoute = require('./routes/Login')
 const AtividadesRoute = require('./routes/Atividades')
+const RegisterRoute = require('./routes/Registro')
 const session = require('express-session')
 const flash = require('connect-flash')
 //CONFIG
@@ -22,6 +23,7 @@ app.use(session({
 //ROTAS
 app.use('/', LoginRoute)
 app.use('/atividades', AtividadesRoute)
+app.use('/register', RegisterRoute)
 //BANCO DE DADOS
 mongoose.connect("mongodb://localhost/ToDoApp", () => console.log("Tudo bem no banco !"))
 //SERVER
