@@ -48,5 +48,10 @@ router.get('/RegistrarAdmin', async (req, res) => {
     
 })
 
+router.get('/sessionEnded', (req,res) => {
+    req.session.destroy()
+    res.redirect('/')
+})
+
 
 module.exports = router
