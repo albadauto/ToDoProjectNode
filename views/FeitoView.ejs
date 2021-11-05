@@ -1,0 +1,32 @@
+<%- include('./templates/header') %>
+<br />
+<% if (success.length > 0) { %>
+  <div class="alert alert-dark" role="alert">
+    <%= success %>
+  </div>
+<%}%>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Instituição</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Criado em</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% result.forEach((resultado) => { %>
+    <tr>
+      <th scope="row"><%= resultado.nome %></th>
+      <td><%= resultado.nomeInstituicao %></td>
+      <td><%= resultado.descricao %></td>
+      <td><%= resultado.dataCreated %></td>
+      <td><a class="btn btn-danger" href="/Feito/deletarFeito/<%= resultado._id%>" onclick="return confirm('Deseja realmente deletar?')"> Deletar </a></td>
+
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('./templates/footer')%>
