@@ -271,21 +271,20 @@ html {
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Login Form -->
-    <b><h3>BEM VINDO(A) AO TO DO PROJECT(BETA)</h3></b>
-    <form action="/verifyLogin" method="post">
+    <b><h3>Digite seu email!</h3></b>
+    <% if (error.length > 0) {%>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <%}%>
+    <form action="/recover/verify" method="post">
       <input type="email" id="login" class="form-control" name="email" placeholder="login" style="margin-top:50px"><br>
-      <input type="password" id="password" class="form-control" name="senha" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+
+      <input type="submit" class="fadeIn fourth" value="Registrar">
     </form>
-      <% if(error.length > 0){ %>
-        <div class="alert alert-danger" role="alert">
-          <%= error %>
-        </div>
-      <% } %>
-    <!-- Remind Passowrd -->
+     
     <div id="formFooter">
-      <a class="underlineHover" href="/register">Não tem registro? Cadastre-se agora!</a><br>
-      <a class="underlineHover" href="/recover">Esqueci a senha</a>
+      <a class="underlineHover" href="/">Já tem conta? Entre!</a>
     </div>
 
     

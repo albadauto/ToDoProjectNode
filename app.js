@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 const LoginRoute = require("./routes/Login");
 const AtividadesRoute = require("./routes/Atividades");
 const RegisterRoute = require("./routes/Registro");
-const Feito = require("./routes/Feito");
+const FeitoRoute = require("./routes/Feito");
+const RecoverRoute = require("./routes/Recover");
 const session = require("express-session");
 const flash = require("connect-flash");
 //CONFIG
@@ -27,7 +28,8 @@ app.use(
 app.use("/", LoginRoute);
 app.use("/atividades", AtividadesRoute);
 app.use("/register", RegisterRoute);
-app.use("/feito", Feito);
+app.use("/feito", FeitoRoute);
+app.use("/recover", RecoverRoute);
 //BANCO DE DADOS
 mongoose.connect("mongodb://localhost/ToDoApp", () =>
   console.log("Tudo bem no banco !")
